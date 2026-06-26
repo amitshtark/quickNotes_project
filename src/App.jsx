@@ -8,6 +8,7 @@ import { saveNotes, loadNotes } from './utils/storage'
 
 function App() {
   const [noteText, setNoteText] = useState('');
+  const [noteCategory, setNoteCategory] = useState('Personal')
   const [notes, setNotes] = useState(() => loadNotes());
   const [noteTitle, setNoteTitle] = useState("");
   const [selectedNote, setSelectedNote] = useState(null);
@@ -26,6 +27,7 @@ function App() {
       const newNote = 
     {
       id: now,
+      category: noteCategory,
       title: noteTitle,
       text: noteText,
       createdAt: now
@@ -33,9 +35,12 @@ function App() {
       setNotes([...notes, newNote]);
       setNoteText('');
       setNoteTitle('');
+      setNoteCategory('Personal')
     }
   }
-  function updateNote(id, updatedTitle, updatedText) {
+
+
+  function updateNote(id, updatedTitle, updatedText, updatedCategory) {
   setNotes(
     notes.map((note) => {
       if (note.id === id) {
@@ -45,6 +50,8 @@ function App() {
           title: updatedTitle,
 
           text: updatedText,
+
+          category: updatedCategory,
 
           updatedAt: Date.now()
         };
@@ -64,6 +71,14 @@ function App() {
   return(
     <>
   <div id='input-area'>
+
+  <select id="select-category" value={noteCategory} onChange={(e) => setNoteCategory(e.target.value)}>
+    <option value="Personal" >Personal</option>
+    <option value="Study" >Study</option>
+    <option value="Work" >Work</option>
+  </select>
+
+
   <input id='title' placeholder='Title' value={noteTitle} onChange={(e) => setNoteTitle(e.target.value)}/>
   <textarea value={noteText} onChange={(e) =>setNoteText(e.target.value)}/>
   <button onClick={addNote}>Add</button>

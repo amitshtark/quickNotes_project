@@ -82,3 +82,15 @@ button {
   outline: none;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
+
+.note.Personal {
+  background-color: #fff7d6;
+}
+
+.note.Work {
+  background-color: #dbeafe;
+}
+
+.note.Study {
+  background-color: #dcfce7;
+}

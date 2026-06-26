@@ -13,12 +13,13 @@ function Note({note, deleteNote, setSelectedNote}){
     }
 
     return(
-        <div className="note" onClick={() => setSelectedNote(note)}>
+        <div className={`note ${note.category}`} onClick={() => setSelectedNote(note)}>
             <button onClick={(e) => {
                 e.stopPropagation();
                 deleteNote(note.id)
             }}
             >X</button>
+            <h6>{note.category}</h6>
             {note.title?.trim() && <h3>{note.title}</h3>}
             <p>{note.text}</p>
             <small>createdAt: {date} <br /> </small>

@@ -8,15 +8,13 @@ function NoteModal({selectedNote, closeModal, updateNote})
 
     const [currentTitle, setCurrentTitle] = useState(selectedNote.title);
     const [currentText, setCurrentText] = useState(selectedNote.text);
+    const [currentCategory, setCurrentCategory] = useState(selectedNote.category)
 
-    const date = new Date(selectedNote.createdAt).toLocaleString([], {
-        dateStyle: "short",
-        timeStyle: "short"
-    });
+    
     function handleUpdate(){
         if(currentText.trim() !== "")
         {
-            updateNote(selectedNote.id, currentTitle, currentText);
+            updateNote(selectedNote.id, currentTitle, currentText, currentCategory);
             closeModal();
         }
     }
@@ -24,6 +22,11 @@ function NoteModal({selectedNote, closeModal, updateNote})
     return(
     <Modal isOpen = {true} onRequestClose={closeModal} className="note-modal" overlayClassName="note-modal-overlay">
         <button onClick={closeModal}>X</button>
+          <select id="select-category" value={currentCategory} onChange={(e) => setCurrentCategory(e.target.value)}>
+            <option value="Personal" >Personal</option>
+            <option value="Study" >Study</option>
+            <option value="Work" >Work</option>
+        </select>
         <input id="titleInput" value={currentTitle} onChange={(e) => setCurrentTitle(e.target.value)}/>
         <textarea id="textInput" value={currentText} onChange={(e) => setCurrentText(e.target.value)} />
         <button id="updateNoteBtn" onClick={handleUpdate}>Update</button>
