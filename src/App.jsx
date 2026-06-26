@@ -1,12 +1,23 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import Note from './components/Note'
 import NoteModal from './components/noteModal'
+import { saveNotes, loadNotes } from './utils/storage'
+
+
+
 function App() {
   const [noteText, setNoteText] = useState('');
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState(() => loadNotes());
   const [noteTitle, setNoteTitle] = useState("");
   const [selectedNote, setSelectedNote] = useState(null);
+
+
+
+  useEffect(() => {
+  saveNotes(notes);
+  }, [notes]);
+
 
   function addNote(){
     if(noteText.trim() !== "")
@@ -20,8 +31,8 @@ function App() {
       createdAt: now
     }
       setNotes([...notes, newNote]);
-      setNoteText('')
-      setNoteTitle('')
+      setNoteText('');
+      setNoteTitle('');
     }
   }
   function updateNote(id, updatedTitle, updatedText) {
@@ -38,7 +49,6 @@ function App() {
           updatedAt: Date.now()
         };
       }
-
       return note;
     })
   );
