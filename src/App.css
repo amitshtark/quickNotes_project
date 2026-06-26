@@ -1,8 +1,10 @@
 body {
   background-color: #f7efe7;
   font-family: Arial, sans-serif;
+  margin: 0;
 }
 
+/* Add note form */
 #input-area {
   width: 420px;
   margin: 50px auto 40px;
@@ -15,6 +17,15 @@ body {
   gap: 15px;
 }
 
+#input-area input,
+#input-area select {
+  padding: 10px 12px;
+  border: 1px solid #d6b98c;
+  border-radius: 8px;
+  font-size: 15px;
+  background-color: white;
+}
+
 textarea {
   min-height: 180px;
   resize: none;
@@ -24,7 +35,7 @@ textarea {
   font-size: 16px;
 }
 
-button {
+#input-area button {
   height: 42px;
   border: none;
   border-radius: 8px;
@@ -34,27 +45,111 @@ button {
   cursor: pointer;
 }
 
-.notes-grid {
-  width: 80%;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+#input-area button:hover {
+  background-color: #c88445;
 }
 
+/* Search */
+#search-input {
+  display: block;
+  width: 420px;
+  max-width: 90%;
+  margin: 25px auto 12px;
+  padding: 12px 16px;
+  border: 1px solid #d6b98c;
+  border-radius: 10px;
+  font-size: 16px;
+  background-color: #fffaf3;
+}
+
+/* Category filters */
+#category-filters {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+#category-filters button {
+  padding: 10px 18px;
+  border: 1px solid #c28b55;
+  border-radius: 999px;
+  background-color: #fffaf3;
+  color: #7a4a24;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#category-filters button:hover {
+  background-color: #f3dfc8;
+}
+
+#category-filters button.active {
+  background-color: #d89b5f;
+  color: white;
+  border-color: #d89b5f;
+}
+
+/* Notes grid */
+.notes-grid {
+  width: 85%;
+  margin: 30px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 280px);
+  gap: 24px;
+  justify-content: center;
+}
+
+/* Note card */
 .note {
-  background-color: #fff7d6;
-  border: 1px solid #e6c76f;
-  border-radius: 12px;
-  padding: 18px;
-  min-height: 150px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  width: 280px;
+  min-height: 220px;
+  padding: 20px;
+  border-radius: 16px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
   word-break: break-word;
+}
+
+.note:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.note button {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background-color: #d89b5f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  float: right;
+  font-weight: bold;
+}
+
+.note button:hover {
+  background-color: #c88445;
+}
+
+.note h6 {
+  margin: 0 0 20px;
+  color: #6b5f73;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+.note h3 {
+  margin: 10px 0;
+  color: #5f536b;
+  font-size: 22px;
 }
 
 .note p {
   font-size: 18px;
   margin-top: 12px;
+  color: #5f536b;
 }
 
 .note small {
@@ -62,6 +157,23 @@ button {
   font-size: 13px;
 }
 
+/* Category colors */
+.note.Personal {
+  background-color: #fff7d6;
+  border: 1px solid #e6c76f;
+}
+
+.note.Work {
+  background-color: #dbeafe;
+  border: 1px solid #93c5fd;
+}
+
+.note.Study {
+  background-color: #dcfce7;
+  border: 1px solid #86efac;
+}
+
+/* Modal */
 .note-modal-overlay {
   position: fixed;
   inset: 0;
@@ -83,14 +195,34 @@ button {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
-.note.Personal {
-  background-color: #fff7d6;
+.note-modal input,
+.note-modal textarea,
+.note-modal select {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border: 1px solid #d6b98c;
+  border-radius: 8px;
+  font-size: 15px;
 }
 
-.note.Work {
-  background-color: #dbeafe;
+.note-modal textarea {
+  min-height: 130px;
 }
 
-.note.Study {
-  background-color: #dcfce7;
+.note-modal button {
+  margin-top: 8px;
+  height: 36px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: #d89b5f;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.note-modal button:hover {
+  background-color: #c88445;
 }
